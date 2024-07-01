@@ -8,9 +8,9 @@ class TestSolution(unittest.TestCase):
         self.solution = Solution()
 
     def test_findTargetSumWays(self):
-        # self.assertEqual(
-        #     self.solution.findTargetSumWays([1, 1], 2), 1, "Example 1 failed"
-        # )
+        self.assertEqual(
+            self.solution.findTargetSumWays([1, 1], 2), 1, "Example 1 failed"
+        )
         self.assertEqual(
             self.solution.findTargetSumWays([1, 1, 1, 1, 1], 3), 5, "Example 1 failed"
         )
@@ -30,6 +30,24 @@ class Solution:
             r = dfs(i + 1, total - nums[i]) + dfs(i + 1, total + nums[i])
             cache[(i, total)] = r
             return r
+
+        return dfs(0, 0)
+
+
+class CSolution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        cache = {}
+
+        def dfs(i, total):
+            if (i, total) in cache:
+                return cache[(i, total)]
+            if i == len(nums):
+                return 1 if total == target else 0
+
+            cache[(i, total)] = dfs(i + 1, total + nums[i]) + dfs(
+                i + 1, total - nums[i]
+            )
+            return cache[(i, total)]
 
         return dfs(0, 0)
 
