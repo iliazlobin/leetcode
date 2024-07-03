@@ -8,14 +8,14 @@ class TestSolution(unittest.TestCase):
         self.solution = Solution()
 
     def test_isPalindrome(self):
-        # s = "A man, a plan, a canal: Panama"
-        # self.assertEqual(self.solution.isPalindrome(s), True)
+        s = "A man, a plan, a canal: Panama"
+        self.assertEqual(self.solution.isPalindrome(s), True)
 
-        # s = "race a car"
-        # self.assertEqual(self.solution.isPalindrome(s), False)
+        s = "race a car"
+        self.assertEqual(self.solution.isPalindrome(s), False)
 
-        # s = " "
-        # self.assertEqual(self.solution.isPalindrome(s), True)
+        s = " "
+        self.assertEqual(self.solution.isPalindrome(s), True)
 
         s = "0P"
         self.assertEqual(self.solution.isPalindrome(s), False)
@@ -36,12 +36,12 @@ class Solution:
                 r -= 1
         return True
 
-    def alphaNum(self, c):
-        return (
-            ord("A") <= ord(c) <= ord("Z")
-            or ord("a") <= ord(c) <= ord("z")
-            or ord("0") <= ord(c) <= ord("9")
-        )
+    # def alphaNum(self, c):
+    #     return (
+    #         ord("A") <= ord(c) <= ord("Z")
+    #         or ord("a") <= ord(c) <= ord("z")
+    #         or ord("0") <= ord(c) <= ord("9")
+    #     )
 
 
 if __name__ == "__main__":

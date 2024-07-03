@@ -13,8 +13,45 @@ class TestSolution(unittest.TestCase):
         self.assertFalse(self.solution.checkInclusion("hello", "ooolleoooleh"))
         self.assertTrue(self.solution.checkInclusion("abc", "bbbca"))
 
-
 class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        s1Count = {}
+        uniques = 0
+        for c in s1:
+            if c in s1Count:
+                s1Count[c] += 1
+            else:
+                s1Count[c] = 1
+                uniques += 1
+
+        s2Count = {}
+        matches = 0
+        for i, c in enumerate(s2):
+            if c in s1Count:
+                s2Count[c] = s2Count.get(c, 0) + 1
+
+                if s1Count[c] == s2Count[c]:
+                    matches += 1
+                elif s1Count[c] + 1 == s2Count[c]:
+                    matches -= 1
+
+            if i >= len(s1):
+                p = s2[i - len(s1)]
+                if p in s2Count:
+                    s2Count[p] -= 1
+
+                    if s1Count[p] == s2Count[p]:
+                        matches += 1
+                    elif s1Count[p] - 1 == s2Count[p]:
+                        matches -= 1
+
+            if matches == uniques:
+                return True
+
+        return False
+
+
+class NSolution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         if len(s1) > len(s2):
             return False
