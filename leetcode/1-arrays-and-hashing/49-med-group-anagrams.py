@@ -7,26 +7,29 @@ class TestSolution(unittest.TestCase):
     def setUp(self):
         self.solution = Solution()
 
-    def test_groupAnagrams(self):
+    def test_groupAnagrams_example1(self):
         strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+        expected = [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
         result = self.solution.groupAnagrams(strs)
-        self.assertEqual(len(result), 3)
-        self.assertTrue(["eat", "tea", "ate"] in result)
-        self.assertTrue(["tan", "nat"] in result)
-        self.assertTrue(["bat"] in result)
+        self.assertEqual(sorted(map(sorted, result)), sorted(map(sorted, expected)))
 
+    def test_groupAnagrams_example2(self):
         strs = [""]
+        expected = [[""]]
         result = self.solution.groupAnagrams(strs)
-        self.assertEqual(list(result), [[""]])
+        self.assertEqual(sorted(map(sorted, result)), sorted(map(sorted, expected)))
 
+    def test_groupAnagrams_example3(self):
         strs = ["a"]
+        expected = [["a"]]
         result = self.solution.groupAnagrams(strs)
-        self.assertEqual(list(result), [["a"]])
+        self.assertEqual(sorted(map(sorted, result)), sorted(map(sorted, expected)))
 
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        hashMap = defaultdict(list)
+        res = defaultdict(list)
+
         for s in strs:
             count = [0] * 26
 
@@ -34,8 +37,9 @@ class Solution:
                 n = ord(c) - ord("a")
                 count[n] += 1
 
-            hashMap[tuple(count)].append(s)
-        return list(hashMap.values())
+            res[tuple(count)].append(s)
+
+        return list(res.values())
 
 
 if __name__ == "__main__":
