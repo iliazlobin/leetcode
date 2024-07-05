@@ -44,6 +44,38 @@ class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         dummy = ListNode(0, head)
         groupPrev = dummy
+        head = dummy
+
+        pos = 0
+        while head.next:
+            pos += 1
+            head = head.next
+            if pos % k != 0:
+                continue
+
+            groupNext = head.next
+
+            prev = head.next
+            cur = groupPrev.next
+            while cur != groupNext:
+                tmp = cur.next
+                cur.next = prev
+                prev = cur
+                cur = tmp
+
+            tmp = groupPrev.next
+            groupPrev.next = head
+            groupPrev = tmp
+            head = groupPrev
+            pos = 0
+
+        return dummy.next
+
+
+class NSolution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        groupPrev = dummy
 
         while True:
             kth = self.getKth(groupPrev, k)
