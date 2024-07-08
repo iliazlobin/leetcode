@@ -11,13 +11,31 @@
       "program": "${file}",
       "cwd": "${fileDirname}",
       "env": {
-        "PYTHONPATH": "${env:PYTHONPATH}:/home/izlobin/ws/dspy-research/dspy",
+        "PYTHONPATH": "${env:PYTHONPATH}:/home/izlobin/ws/dspy-research/dspy"
         // "PYTPYDEVD_DISABLE_FILE_VALIDATION": "0",
       },
       "envFile": "${workspaceFolder}/.env",
       "console": "integratedTerminal",
-      "python": "/home/izlobin/miniconda3/envs/pytorch-3.10/bin/python",
+      "python": "/home/izlobin/miniconda3/envs/pytorch-3.10/bin/python"
       // "pythonArgs": ["-Xfrozen_modules=off"]
+    },
+    {
+      "name": "golang file",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${fileDirname}"
+    },
+    {
+      "name": "golang test",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "program": "${fileDirname}",
+      "args": ["-test.v"],
+      "console": "integratedTerminal"
     }
   ]
 }
