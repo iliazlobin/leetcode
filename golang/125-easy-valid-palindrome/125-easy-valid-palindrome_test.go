@@ -5,7 +5,29 @@ import (
 	"unicode"
 )
 
+func isAlphaNumeric(c rune) bool {
+	return unicode.IsNumber(c) || unicode.IsLetter(c)
+}
+
 func isPalindrome(s string) bool {
+	l, r := 0, len(s)-1
+	for l < r {
+		if !isAlphaNumeric(rune(s[l])) {
+			l++
+		} else if !isAlphaNumeric(rune(s[r])) {
+			r--
+		} else {
+			if unicode.ToLower(rune(s[l])) != unicode.ToLower(rune(s[r])) {
+				return false
+			}
+			l++
+			r--
+		}
+	}
+	return true
+}
+
+func isPalindrome2(s string) bool {
 	r := len(s) - 1
 	for l := 0; l < r; l += 1 {
 		lc := unicode.ToLower(rune(s[l]))

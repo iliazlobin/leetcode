@@ -8,21 +8,21 @@ class TestSolution(unittest.TestCase):
         self.solution = Solution()
 
     def test_numIslands(self):
-        # grid1 = [
-        #     ["1", "1", "1", "1", "0"],
-        #     ["1", "1", "0", "1", "0"],
-        #     ["1", "1", "0", "0", "0"],
-        #     ["0", "0", "0", "0", "0"],
-        # ]
-        # self.assertEqual(self.solution.numIslands(grid1), 1)
+        grid1 = [
+            ["1", "1", "1", "1", "0"],
+            ["1", "1", "0", "1", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "0", "0", "0"],
+        ]
+        self.assertEqual(self.solution.numIslands(grid1), 1)
 
-        # grid2 = [
-        #     ["1", "1", "0", "0", "0"],
-        #     ["1", "1", "0", "0", "0"],
-        #     ["0", "0", "1", "0", "0"],
-        #     ["0", "0", "0", "1", "1"],
-        # ]
-        # self.assertEqual(self.solution.numIslands(grid2), 3)
+        grid2 = [
+            ["1", "1", "0", "0", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "1", "0", "0"],
+            ["0", "0", "0", "1", "1"],
+        ]
+        self.assertEqual(self.solution.numIslands(grid2), 3)
 
         grid = [["1", "1", "1"], ["0", "1", "0"], ["1", "1", "1"]]
         self.assertEqual(self.solution.numIslands(grid), 1)
