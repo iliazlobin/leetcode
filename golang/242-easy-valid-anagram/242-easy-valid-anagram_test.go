@@ -5,21 +5,31 @@ import (
 )
 
 func isAnagram(s string, t string) bool {
-	hMap := make(map[rune]int)
+	characters := make(map[rune]int)
+
 	for _, c := range s {
-		hMap[c] += 1
+		if _, ok := characters[c]; !ok {
+			characters[c] = 0
+		}
+		characters[c] += 1
 	}
+
 	for _, c := range t {
-		hMap[c] -= 1
-		if hMap[c] < 0 {
+		if _, ok := characters[c]; !ok {
+			return false
+		}
+		characters[c] -= 1
+		if characters[c] < 0 {
 			return false
 		}
 	}
-	for _, v := range hMap {
+
+	for _, v := range characters {
 		if v != 0 {
 			return false
 		}
 	}
+
 	return true
 }
 

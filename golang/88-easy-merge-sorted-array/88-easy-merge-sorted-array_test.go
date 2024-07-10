@@ -4,24 +4,60 @@ import (
 	"testing"
 )
 
-func isPalindrome(n int) error {
-	return nil
+func merge(nums1 []int, m int, nums2 []int, n int) {
+	m -= 1
+	n -= 1
+	r := len(nums1) - 1
+	for n >= 0 {
+		if m >= 0 && nums1[m] > nums2[n] {
+			nums1[r] = nums1[m]
+			m -= 1
+		} else {
+			nums1[r] = nums2[n]
+			n -= 1
+		}
+		r -= 1
+	}
 }
 
-func TestIsPalindrome(t *testing.T) {
+func TestMerge(t *testing.T) {
 	testCases := []struct {
-		input    int
-		expected bool
+		nums1    []int
+		m        int
+		nums2    []int
+		n        int
+		expected []int
 	}{
-		{121, true},
-		{-121, false},
-		{10, false},
+		{
+			nums1:    []int{1, 2, 3, 0, 0, 0},
+			m:        3,
+			nums2:    []int{2, 5, 6},
+			n:        3,
+			expected: []int{1, 2, 2, 3, 5, 6},
+		},
+		{
+			nums1:    []int{1},
+			m:        1,
+			nums2:    []int{},
+			n:        0,
+			expected: []int{1},
+		},
+		{
+			nums1:    []int{0},
+			m:        0,
+			nums2:    []int{1},
+			n:        1,
+			expected: []int{1},
+		},
 	}
 
 	for _, tc := range testCases {
-		actual := isPalindrome(tc.input)
-		if actual != tc.expected {
-			t.Errorf("isPalindrome(%d) = %v, expected %v", tc.input, actual, tc.expected)
+		merge(tc.nums1, tc.m, tc.nums2, tc.n)
+		for i, v := range tc.nums1 {
+			if v != tc.expected[i] {
+				t.Errorf("merge() failed: expected %v, got %v", tc.expected, tc.nums1)
+				break
+			}
 		}
 	}
 }

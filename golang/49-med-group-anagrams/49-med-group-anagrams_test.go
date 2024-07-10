@@ -8,19 +8,21 @@ import (
 
 func groupAnagrams(strs []string) [][]string {
 	hMap := make(map[[26]int][]string)
+
 	for _, s := range strs {
-		count := [26]int{}
+		chars := [26]int{}
 		for _, c := range s {
-			n := c - 'a'
-			count[n]++
+			chars[c-'a'] += 1
 		}
-		hMap[count] = append(hMap[count], s)
+		hMap[chars] = append(hMap[chars], s)
 	}
-	var values [][]string
+
+	res := [][]string{}
 	for _, v := range hMap {
-		values = append(values, v)
+		res = append(res, v)
 	}
-	return values
+
+	return res
 }
 
 func TestGroupAnagrams(t *testing.T) {
