@@ -1,30 +1,9 @@
 # Description
 
-This repo contains coding tasks and solutions for LeetCode and NeetCode challenges.
+This repo contains tasks and solutions for LeetCode and NeetCode challenges I can confidently solve in Python and Golang.
 
-# Template
-All Templates are located in the `./templates` directory.
+# My Progress
 
-### Example
+[LeetCode Dashboard](https://leetcode.com/u/6iEph3Npnj/)
 
-```python
-import unittest
-from collections import Counter
-from typing import List, Optional
-
-class TestSolution(unittest.TestCase):
-    def setUp(self):
-        self.solution = Solution()
-
-    def test_isValid(self):
-        print()
-
-
-class Solution:
-    def isValid(self, s: str) -> bool:
-        print()
-
-
-if __name__ == "__main__":
-    unittest.main()
-```
+![](./docs/progress.png)
