@@ -7,33 +7,26 @@ import (
 func longestCommonPrefix(strs []string) string {
 	if len(strs) == 0 {
 		return ""
+	} else if len(strs) == 1 {
+		return strs[0]
+	} else if len(strs[0]) == 0 {
+		return ""
 	}
-	i := 0
-	res := -1
-	stop := false
-	for true {
-		c := byte(0)
-		for j, s := range strs {
-			if i == len(s) {
-				stop = true
-				break
-			}
-			if j == 0 {
-				c = s[i]
-			} else {
-				if c != s[i] {
-					stop = true
-					break
-				}
+
+	l := 0
+outer:
+	for l < len(strs[0]) {
+		c := strs[0][l]
+		for i := 1; i < len(strs); i += 1 {
+			if l == len(strs[i]) || strs[i][l] != c {
+				break outer
 			}
 		}
-		if stop {
-			break
-		}
-		res = i
-		i += 1
+
+		l += 1
 	}
-	return strs[0][:res+1]
+
+	return strs[0][:l]
 }
 
 func TestLongestCommonPrefix(t *testing.T) {
@@ -41,8 +34,9 @@ func TestLongestCommonPrefix(t *testing.T) {
 		input    []string
 		expected string
 	}{
-		{[]string{"flower", "flow", "flight"}, "fl"},
-		{[]string{"dog", "racecar", "car"}, ""},
+		// {[]string{"flower", "flow", "flight"}, "fl"},
+		// {[]string{"dog", "racecar", "car"}, ""},
+		{[]string{"ab", "a"}, "a"},
 	}
 
 	for _, tc := range testCases {

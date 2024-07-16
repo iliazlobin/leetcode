@@ -1,26 +1,21 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
 func strStr(haystack string, needle string) int {
-	r := 0
-	var first int
+	p := 0
 	for i := 0; i < len(haystack); i += 1 {
-		if r > 3 {
-			fmt.Printf("")
-		}
-		if haystack[i] == needle[r] {
-			r += 1
+		c := rune(haystack[i])
+		if c != rune(needle[p]) {
+			i -= p
+			p = 0
 		} else {
-			i = first
-			r = 0
-			first = i + 1
-		}
-		if r == len(needle) {
-			return first
+			p += 1
+			if p == len(needle) {
+				return i - p + 1
+			}
 		}
 	}
 	return -1

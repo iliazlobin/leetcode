@@ -6,24 +6,29 @@ import (
 
 func removeDuplicates(nums []int) int {
 	l, r := 0, 0
+	start := 0
 
 	for r < len(nums) {
-		count := 1
-		for r+1 < len(nums) && nums[r] == nums[r+1] {
+		for r < len(nums)-1 && nums[r+1] == nums[r] {
 			r += 1
-			count += 1
 		}
 
-		iters := 2
-		if count < 2 {
-			iters = count
+		duplicates := r - start + 1
+
+		copies := duplicates
+		if copies > 2 {
+			copies = 2
 		}
-		for i := 0; i < iters; i++ {
-			nums[l] = nums[r]
+		for copies > 0 {
+			if start > 0 {
+				nums[l] = nums[r]
+			}
 			l += 1
+			copies -= 1
 		}
 
 		r += 1
+		start = r
 	}
 
 	return l

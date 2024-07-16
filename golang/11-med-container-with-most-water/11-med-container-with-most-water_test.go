@@ -5,24 +5,25 @@ import (
 )
 
 func maxArea(height []int) int {
-	r := len(height) - 1
 	maxArea := 0
-	for l := 0; l < r; {
-		curHeight := height[l]
-		if height[r] < curHeight {
-			curHeight = height[r]
+	l, r := 0, len(height)-1
+	for l < r {
+		h := height[l]
+		if height[r] < h {
+			h = height[r]
 		}
-		area := (r - l) * curHeight
+		area := h * (r - l)
 		if area > maxArea {
 			maxArea = area
 		}
 
 		if height[l] < height[r] {
-			l++
+			l += 1
 		} else {
-			r--
+			r -= 1
 		}
 	}
+
 	return maxArea
 }
 

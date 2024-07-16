@@ -6,23 +6,23 @@ import (
 )
 
 func isHappy(n int) bool {
-	hMap := make(map[int]bool)
-	cur := n
+	hmap := make(map[int]bool)
+
 	for {
 		new := 0
-		for _, c := range strconv.Itoa(cur) {
-			new += int(c-'0') * int(c-'0')
+		for _, c := range strconv.Itoa(n) {
+			v := int(c - '0')
+			new += v * v
 		}
 		if new == 1 {
-			break
+			return true
 		}
-		if _, ok := hMap[new]; ok {
+		if _, ok := hmap[new]; ok {
 			return false
 		}
-		hMap[new] = true
-		cur = new
+		hmap[new] = true
+		n = new
 	}
-	return true
 }
 
 func TestIsHappy(t *testing.T) {
