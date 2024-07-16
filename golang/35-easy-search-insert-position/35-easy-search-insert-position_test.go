@@ -5,15 +5,15 @@ import (
 )
 
 func searchInsert(nums []int, target int) int {
-	r := len(nums) - 1
-	l := 0
-
+	l, r := 0, len(nums)-1
 	for l <= r {
-		mid := int((r + l) / 2)
-		if nums[mid] < target {
-			l = mid + 1
+		m := int((l + r) / 2)
+		if nums[m] == target {
+			return m
+		} else if nums[m] > target {
+			r = m - 1
 		} else {
-			r = mid - 1
+			l = m + 1
 		}
 	}
 	return l
@@ -25,8 +25,9 @@ func TestSearchInsert(t *testing.T) {
 		target   int
 		expected int
 	}{
-		// {nums: []int{1, 3, 5, 6}, target: 5, expected: 2},
-		// {nums: []int{1, 3, 5, 6}, target: 2, expected: 1},
+		{nums: []int{1, 3, 5, 6}, target: 4, expected: 2},
+		{nums: []int{1, 3, 5, 6}, target: 5, expected: 2},
+		{nums: []int{1, 3, 5, 6}, target: 2, expected: 1},
 		{nums: []int{1, 3, 5, 6}, target: 7, expected: 4},
 	}
 
