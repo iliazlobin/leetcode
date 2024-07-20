@@ -16,37 +16,39 @@ class TestSolution(unittest.TestCase):
         target = 15
         self.assertFalse(self.solution.searchMatrix(matrix, target))
 
-        matrix = [[1,1]]
+        matrix = [[1, 1]]
         target = 2
         self.assertFalse(self.solution.searchMatrix(matrix, target))
 
-        matrix = [[1],[3]]
+        matrix = [[1], [3]]
         target = 3
         self.assertTrue(self.solution.searchMatrix(matrix, target))
 
+
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        COLS = len(matrix[0]) - 1
         top, bottom = 0, len(matrix) - 1
-        if len(matrix) > 1:
-            while top <= bottom:
-                row = (top + bottom) // 2
-                if target > matrix[row][-1]:
-                    top = row + 1
-                elif target < matrix[row][0]:
-                    bottom = row - 1
-                else:
-                    break
-        else:
-            row = 0
-        first, last = 0, len(matrix[row]) - 1
-        while first <= last:
-            rm = (first + last) // 2
-            if target < matrix[row][rm]:
-                last = rm - 1
-            elif target > matrix[row][rm]:
-                first = rm + 1
+        while top <= bottom:
+            row = (top + bottom) // 2
+            # if target >= matrix[row][0] and target <= matrix[row][COLS]:
+            if target < matrix[row][0]:
+                bottom -= 1
+            elif target > matrix[row][COLS]:
+                top += 1
+            else:
+                break
+
+        l, r = 0, len(matrix[0]) - 1
+        while l <= r:
+            m = (l + r) // 2
+            if target < matrix[row][m]:
+                r = m - 1
+            elif target > matrix[row][m]:
+                l = m + 1
             else:
                 return True
+
         return False
 
 
