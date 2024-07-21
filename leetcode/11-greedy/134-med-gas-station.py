@@ -24,25 +24,25 @@ class TestSolution(unittest.TestCase):
 
         gas = [5, 1, 2, 3, 4]
         cost = [4, 4, 1, 5, 1]
-        self.assertEqual(self.solution.canCompleteCircuit(gas, cost), 4, "Failed for custom case")
+        self.assertEqual(
+            self.solution.canCompleteCircuit(gas, cost), 4, "Failed for custom case"
+        )
+
 
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         if sum(gas) < sum(cost):
             return -1
 
-        diffs = [0] * len(gas)
-        for i in range(len(gas)):
-            diffs[i] = gas[i] - cost[i]
-
-        start = 0
-        total = 0
-        for i in range(len(diffs)):
-            if total + diffs[i] < 0:
-                start = i + 1 if start < len(diffs) else 0
-                total = 0
-            else:
-                total += diffs[i]
+        # gas = [2, 3, 4]
+        # cost = [3, 4, 3]
+        start = -1
+        balance = 0
+        for i, (g, c) in enumerate(zip(gas, cost)):
+            balance += (g - c)
+            if balance < 0:
+                start = i + 1 if i < len(gas) - 1 else 0
+                balance = 0
 
         return start
 

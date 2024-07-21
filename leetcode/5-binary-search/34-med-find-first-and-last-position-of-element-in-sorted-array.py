@@ -8,19 +8,19 @@ class TestSolution(unittest.TestCase):
         self.solution = Solution()
 
     def test_searchRange(self):
-        # self.assertEqual(
-        #     self.solution.searchRange([5, 7, 7, 8, 8, 10], 8),
-        #     [3, 4],
-        #     "Should be [3, 4]",
-        # )
-        # self.assertEqual(
-        #     self.solution.searchRange([5, 7, 7, 8, 8, 10], 6),
-        #     [-1, -1],
-        #     "Should be [-1, -1]",
-        # )
-        # self.assertEqual(
-        #     self.solution.searchRange([], 0), [-1, -1], "Should be [-1, -1]"
-        # )
+        self.assertEqual(
+            self.solution.searchRange([5, 7, 7, 8, 8, 10], 8),
+            [3, 4],
+            "Should be [3, 4]",
+        )
+        self.assertEqual(
+            self.solution.searchRange([5, 7, 7, 8, 8, 10], 6),
+            [-1, -1],
+            "Should be [-1, -1]",
+        )
+        self.assertEqual(
+            self.solution.searchRange([], 0), [-1, -1], "Should be [-1, -1]"
+        )
         self.assertEqual(self.solution.searchRange([1], 1), [0, 0], "Should be [0, 0]")
 
 

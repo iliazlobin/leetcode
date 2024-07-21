@@ -46,22 +46,17 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def simplifyPath(self, path: str) -> str:
-        pathStack = []
-        # validPath: Literal[''] = ""
+        stack = []
         paths = path.split("/")
         for p in paths:
-            if p == "":
+            if p == "" or p == ".":
                 continue
             if p == "..":
-                if pathStack:
-                    pathStack.pop()
+                if stack:
+                    stack.pop()
                 continue
-            if p == ".":
-                continue
-            pathStack.append(p)
-
-        return "/" + "/".join(pathStack)
-
+            stack.append(p)
+        return "/" + "/".join(stack)
 
 
 if __name__ == "__main__":

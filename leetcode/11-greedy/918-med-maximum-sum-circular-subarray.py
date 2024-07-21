@@ -36,22 +36,18 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
-        localMax = 0
-        globalMax = float("-inf")
-        localMin = 0
-        globalMin = float("inf")
+        globalMax = localMax = float("-inf")
+        globalMin = localMin = float("inf")
         total = 0
 
         for n in nums:
             total += n
-
             localMax = max(n, n + localMax)
             globalMax = max(globalMax, localMax)
-
             localMin = min(n, n + localMin)
             globalMin = min(globalMin, localMin)
 
-        return max(globalMax, total - globalMin) if globalMax > 0 else globalMax
+        return max(total - globalMin, globalMax) if globalMax > 0 else globalMax
 
 
 if __name__ == "__main__":

@@ -32,29 +32,32 @@ class TestSolution(unittest.TestCase):
             "Failed for custom case: s = '((((()(()()()*()(((((*)()*(**(())))))(())()())(((())())())))))))(((((())*)))()))(()((*()*(*)))(*)()'",
         )
 
+    def test_checkValidString_custom(self):
+        s = "((((()(()()()*()(((((*)()*(**(())))))(())()())(((())())())))))))(((((())*)))()))(()((*()*(*)))(*)()"
+        self.assertTrue(self.solution.checkValidString(s), "Expected output is True.")
+
 
 class Solution:
     def checkValidString(self, s: str) -> bool:
-        minBrackets = 0
-        maxBrackets = 0
+        minB, maxB = 0, 0
 
         for c in s:
             if c == "(":
-                minBrackets += 1
-                maxBrackets += 1
+                minB += 1
+                maxB += 1
             elif c == "*":
-                minBrackets -= 1
-                maxBrackets += 1
+                minB -= 1
+                maxB += 1
             else:
-                minBrackets -= 1
-                maxBrackets -= 1
+                minB -= 1
+                maxB -= 1
 
-            if maxBrackets < 0:
+            if minB < 0:
+                minB = 0
+            if maxB < 0:
                 return False
-            if minBrackets < 0:
-                minBrackets = 0
 
-        return minBrackets == 0
+        return minB == 0
 
 
 if __name__ == "__main__":

@@ -23,8 +23,7 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        localMax = 0
-        globalMax = float("-inf")
+        globalMax = localMax = float("-inf")
 
         for n in nums:
             localMax = max(n, n + localMax)

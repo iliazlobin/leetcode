@@ -3,6 +3,8 @@ import unittest
 from collections import Counter
 from typing import List, Optional
 
+from numpy import sort
+
 
 class TestSolution(unittest.TestCase):
     def setUp(self):
@@ -24,12 +26,11 @@ class TestSolution(unittest.TestCase):
         )
 
 
-# O(logN*N)
 class Solution:
     def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
         count = {}
-        for n in hand:
-            count[n] = count.get(n, 0) + 1
+        for c in hand:
+            count[c] = count.get(c, 0) + 1
 
         minH = list(count.keys())
         heapq.heapify(minH)
@@ -37,14 +38,11 @@ class Solution:
         while minH:
             first = minH[0]
 
-            for i in range(first, first + groupSize):
-                if i not in count:
+            for c in range(first, first + groupSize):
+                if c not in count:
                     return False
-                count[i] -= 1
-
-                if count[i] == 0:
-                    if i != minH[0]:
-                        return False
+                count[c] -= 1
+                if count[c] == 0:
                     heapq.heappop(minH)
 
         return True
