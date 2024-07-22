@@ -17,20 +17,36 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        numSet = set()
+        if len(nums) == 0:
+            return 0
+        s = set(nums)
+        maxSeq = 0
         for n in nums:
-            numSet.add(n)
-        longest = 0
-        for n in nums:
-            if n - 1 not in numSet:
-                c = n
-                while True:
-                    if c in numSet:
-                        c += 1
-                    else:
-                        longest = max(longest, c - n)
-                        break
-        return longest
+            if n - 1 not in s:
+                length = 0
+                while n + length in s:
+                    length += 1
+                maxSeq = max(maxSeq, length)
+        return maxSeq
+
+
+class NlogNSolution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+
+        nums.sort()
+
+        maxS = 1
+        curS = 0
+        for i, n in enumerate(nums):
+            if i > 0 and n - 1 == nums[i - 1]:
+                curS += 1
+                maxS = max(maxS, curS + 1)
+            elif i > 0 and n > nums[i - 1]:
+                curS = 0
+
+        return maxS
 
 
 if __name__ == "__main__":

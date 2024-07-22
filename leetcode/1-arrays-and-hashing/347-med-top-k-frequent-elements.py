@@ -17,6 +17,46 @@ class TestSolution(unittest.TestCase):
         k = 1
         self.assertEqual(set(self.solution.topKFrequent(nums, k)), set([1]))
 
+    def test_topKFrequent_customTest(self):
+        nums = [3, 0, 1, 0]
+        k = 1
+        expected = [0]
+        result = self.solution.topKFrequent(nums, k)
+        self.assertEqual(
+            expected,
+            list(result),
+            f"Failed with nums={nums} and k={k} where expected {expected} but got {list(result)}",
+        )
+
+    def test_topKFrequent_customTest(self):
+        nums = [3, 0, 1, 0]
+        k = 1
+        expected = [0]
+        result = self.solution.topKFrequent(nums, k)
+        self.assertEqual(
+            expected,
+            list(result),
+            f"Failed with nums={nums} and k={k} where expected {expected} but got {list(result)}",
+        )
+
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        hmap = {}
+        for n in nums:
+            hmap[n] = hmap.get(n, 0) + 1
+        freqs = {n: [] for n in range(len(nums) + 1)}
+        for i, v in hmap.items():
+            freqs[v].append(i)
+
+        res = []
+        for f in range(len(freqs) - 1, -1, -1):
+            for e in freqs[f]:
+                k -= 1
+                res.append(e)
+                if k == 0:
+                    return res
+
 
 class NlogNSolution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
@@ -29,22 +69,6 @@ class NlogNSolution:
         values = list(hashMap.values())
         values.sort(key=lambda p: p[1], reverse=True)
         return map(lambda p: p[0], values[:k])
-
-
-class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = {}
-        freq = [[] for i in range(len(nums))]
-        for n in nums:
-            count[n] = 1 + count.get(n, 0)
-        for i, v in count.items():
-            freq[v].append(i)
-        res = []
-        for i in range(len(freq) - 1, 0, -1):
-            for n in freq[i]:
-                res.append(n)
-                if len(res) == k:
-                    return res
 
 
 if __name__ == "__main__":
