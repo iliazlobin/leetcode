@@ -22,6 +22,31 @@ class TestSolution(unittest.TestCase):
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res = []
+
+        def isPali(l, r):
+            while l < r:
+                if s[l] != s[r]:
+                    return False
+                l += 1
+                r -= 1
+            return True
+
+        def dfs(i, sub):
+            if i == len(s):
+                res.append(sub.copy())
+                return
+
+            for j in range(i, len(s)):
+                if isPali(i, j):
+                    dfs(j + 1, sub + [s[i : j + 1]])
+
+        dfs(0, [])
+        return res
+
+
+class SSolution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
         array = []
 
         def isPali(l, r):
@@ -44,7 +69,6 @@ class Solution:
 
         dfs(0)
         return res
-
 
 if __name__ == "__main__":
     unittest.main()

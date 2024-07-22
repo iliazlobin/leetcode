@@ -28,21 +28,18 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
 
-        array = []
-
-        def backtrack(i, total):
+        def dfs(i, sub, total):
             if total == target:
-                res.append(array.copy())
+                res.append(sub.copy())
                 return
-            elif total > target or i == len(candidates):
+            elif total > target:
                 return
+            if i == len(candidates):
+                return
+            dfs(i + 1, sub, total)
+            dfs(i, sub + [candidates[i]], total + candidates[i])
 
-            array.append(candidates[i])
-            backtrack(i, total + candidates[i])
-            array.pop()
-            backtrack(i + 1, total)
-
-        backtrack(0, 0)
+        dfs(0, [], 0)
         return res
 
 

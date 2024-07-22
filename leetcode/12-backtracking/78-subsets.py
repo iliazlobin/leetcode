@@ -23,6 +23,22 @@ class TestSolution(unittest.TestCase):
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         res = []
+
+        def dfs(i, sub):
+            if i == len(nums):
+                res.append(sub.copy())
+                return
+
+            dfs(i + 1, sub)
+            dfs(i + 1, sub + [nums[i]])
+
+        dfs(0, [])
+        return res
+
+
+class XSolution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
         subset = []
 
         def backtrack(i):

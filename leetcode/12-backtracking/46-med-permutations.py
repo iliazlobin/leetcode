@@ -32,7 +32,7 @@ class Solution:
             return [[nums[0]]]
 
         res = []
-        for i in nums:
+        for _ in nums:
             n = nums.pop(0)
             perms = self.permute(nums)
             for p in perms:
