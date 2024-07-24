@@ -28,6 +28,23 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        groups = {}
+
+        for s in strs:
+            chars = [0] * 26
+            for c in s:
+                n = ord(c) - ord("a")
+                chars[n] += 1
+            if tuple(chars) in groups:
+                groups[tuple(chars)].append(s)
+            else:
+                groups[tuple(chars)] = [s]
+
+        return list(groups.values())
+
+
+class SSolution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         res = defaultdict(list)
 
         for s in strs:

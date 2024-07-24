@@ -23,6 +23,17 @@ class TestSolution(unittest.TestCase):
 
 
 class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        diffs = {}
+        for i, n in enumerate(numbers):
+            diff = target - n
+            if n in diffs:
+                return [i, diffs[n]]
+            diffs[diff] = i
+        return []
+
+
+class SSolution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         for i in range(len(nums)):
             for j in range(1, len(nums)):

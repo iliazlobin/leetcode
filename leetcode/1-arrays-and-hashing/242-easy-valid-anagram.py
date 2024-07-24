@@ -1,5 +1,5 @@
 import unittest
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import List, Optional
 
 
@@ -18,6 +18,19 @@ class TestSolution(unittest.TestCase):
 
 
 class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        chars = defaultdict(int)
+        for i in range(len(s)):
+            chars[s[i]] += 1
+            chars[t[i]] -= 1
+        for _, v in chars.items():
+            if v != 0:
+                return False
+        return True
+
+class SSolution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) == 0 or len(s) != len(t):
             return False
