@@ -10,13 +10,29 @@ class TestSolution(unittest.TestCase):
 
     def test_generate_parentheses(self):
         self.assertCountEqual(
-            self.solution.generateParentheses(3),
+            self.solution.generateParenthesis(3),
             ["((()))", "(()())", "(())()", "()(())", "()()()"],
         )
-        self.assertCountEqual(self.solution.generateParentheses(1), ["()"])
-
+        self.assertCountEqual(self.solution.generateParenthesis(1), ["()"])
 
 class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+
+        def dfs(open, close, sub):
+            if open == close == n:
+                res.append(sub)
+                return
+            
+            if open < n:
+                dfs(open + 1, close, sub + "(")
+            if close < open:
+                dfs(open, close + 1, sub + ")")
+            
+        dfs(0, 0, "")
+        return res
+
+class SSolution:
     def generateParenthesis(self, n: int) -> List[str]:
         stack = []
         res = []

@@ -24,6 +24,30 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        res = []
+        i = 0
+        while i < len(asteroids):
+            if asteroids[i] < 0:
+                res.append(asteroids[i])
+            else:
+                break
+            i += 1
+        while i < len(asteroids):
+            c = asteroids[i]
+            if c < 0:
+                while res and res[-1] > 0 and -1 * c >= res[-1]:
+                    if c == res[-1]:
+                        res.pop()
+                        break
+                    res.pop()
+            else:
+                res.append(c)
+            i += 1
+        return res
+
+
+class SSolution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
         stack = []
         for i in range(len(asteroids)):
             a = asteroids[i]
