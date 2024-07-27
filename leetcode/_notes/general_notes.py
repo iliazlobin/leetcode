@@ -2,6 +2,18 @@ import unittest
 from collections import defaultdict
 from typing import List, Optional
 
+match term:
+    case pattern-1:
+            action-1
+    case pattern-2:
+            action-2
+operatorsFuncs = {
+    "-": lambda a, b: int(a) - int(b),
+    "+": lambda a, b: int(a) + int(b),
+    "*": lambda a, b: int(a) * int(b),
+    "/": lambda a, b: int(int(a) / int(b)),
+}
+
 text = "10#neetcode"
 textInd = text.find("#")  # 2
 textLen = text[textInd:]
@@ -65,6 +77,7 @@ def permute(self, nums: List[int]) -> List[List[int]]:
         res.extend(perms)
         nums.append(n)
 
+# largest rectangle area
 stack = []
 heights: List[int] = []
 for i, h in enumerate(iterable=heights):
@@ -79,3 +92,52 @@ for i, h in enumerate(iterable=heights):
 for i, h in stack:
     width = len(heights) - i
     maxArea = max(maxArea, width * h)
+
+# subarrays mins
+arr = [0] + arr
+res = [0] * len(arr)
+stack = [0]
+for i in range(len(arr)):
+    while stack and arr[stack[-1]] > arr[i]:
+        stack.pop()
+    res[i] = res[stack[-1]] + (i - stack[-1]) * arr[i]
+    stack.append(i)
+# return sum(res) % (10**9 + 7)
+
+# reverse colors
+i, l, r = 0, 0, len(nums) - 1
+# [2, 0, 2, 1, 1, 0]
+while i <= r:
+if nums[i] == 0:
+    nums[l], nums[i] = nums[i], nums[l]
+    l += 1
+    i += 1
+elif nums[i] == 2:
+    nums[i], nums[r] = nums[r], nums[i]
+    r -= 1
+else:
+    i += 1
+
+# string balance
+imbalance = 0
+for c in s:
+    if c == "[":
+        imbalance += 1
+    elif imbalance > 0:
+        imbalance -= 1
+# return (imbalance + 1 ) // 2
+
+# hand of straights
+minH = list(count.keys())
+heapq.heapify(minH)
+
+while minH:
+    first = minH[0]
+
+    for c in range(first, first + groupSize):
+        if c not in count:
+            return False
+        count[c] -= 1
+        if count[c] == 0:
+            heapq.heappop(minH)
+
