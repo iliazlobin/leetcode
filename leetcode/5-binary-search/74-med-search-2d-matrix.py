@@ -31,7 +31,6 @@ class Solution:
         top, bottom = 0, len(matrix) - 1
         while top <= bottom:
             row = (top + bottom) // 2
-            # if target >= matrix[row][0] and target <= matrix[row][COLS]:
             if target < matrix[row][0]:
                 bottom -= 1
             elif target > matrix[row][COLS]:

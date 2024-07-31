@@ -34,6 +34,32 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def maxTurbulenceSize(self, arr: List[int]) -> int:
+        last = arr[0]
+        oper = 0
+        res = maxSeq = 1
+        for n in arr[1:]:
+            if n > last:
+                if oper != 2:
+                    maxSeq = 2
+                else:
+                    maxSeq += 1
+                oper = 1
+            elif n < last:
+                if oper != 1:
+                    maxSeq = 2
+                else:
+                    maxSeq += 1
+                oper = 2
+            else:
+                maxSeq = 1
+                oper = 1
+            last = n
+            res = max(res, maxSeq)
+        return res
+
+
+class Solution:
+    def maxTurbulenceSize(self, arr: List[int]) -> int:
         if len(arr) == 1:
             return 1
 

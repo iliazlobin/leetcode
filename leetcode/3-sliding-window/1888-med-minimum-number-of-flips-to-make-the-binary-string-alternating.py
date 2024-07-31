@@ -23,8 +23,31 @@ class TestSolution(unittest.TestCase):
         expected_output = 1
         self.assertEqual(self.solution.minFlips(s), expected_output)
 
+    def test_minFlips_example4(self):
+        s = "001000000010"
+        expected_output = 4
+        self.assertEqual(self.solution.minFlips(s), expected_output)
+
 
 class Solution:
+    def minFlips(self, s: str) -> int:
+        lowerCount = sum(c1 != c2 for c1, c2 in zip(s, itertools.cycle("01")))
+        if not len(s) & 1:
+            return min(lowerCount, len(s) - lowerCount)
+
+        upperCount = lowerCount
+        count = lowerCount
+        for c1, c2 in zip(s, itertools.cycle("10")):
+            count += 1 if c1 != c2 else -1
+            if count < lowerCount:
+                lowerCount = count
+            elif count > upperCount:
+                upperCount = count
+
+        return lowerCount if lowerCount < len(s) - upperCount else len(s) - upperCount
+
+
+class XSolution:
     def minFlips(self, s: str) -> int:
         n = len(s)
         s = s + s
@@ -90,19 +113,20 @@ class LSolution:
 
         change_count = sum(int(ch) != (i & 1) for i, ch in enumerate(s))
 
-        if n & 1 == 0: 
-            if 2*change_count > len(s):
-                change_count = n-change_count
+        if n & 1 == 0:
+            if 2 * change_count > len(s):
+                change_count = n - change_count
         else:
             count = min_count = change_count
-            for ch, ch0 in zip(s, itertools.cycle("01")): 
-                count += 1 if ch==ch0 else -1
+            for ch, ch0 in zip(s, itertools.cycle("01")):
+                count += 1 if ch == ch0 else -1
                 if count < change_count:
                     change_count = count
                 elif n - count < change_count:
                     change_count = n - count
 
         return change_count
+
 
 if __name__ == "__main__":
     unittest.main()
