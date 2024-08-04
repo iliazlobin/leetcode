@@ -50,13 +50,14 @@ class TestSolution(unittest.TestCase):
 
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
+        prefixSum = {0: 1}
         res = 0
-        prefixSum = {0 : 1}
         total = 0
         for n in nums:
             total += n
-            if total - k in prefixSum:
-                res += prefixSum[total - k]
+            diff = total - k
+            if diff in prefixSum:
+                res += prefixSum[diff]
             prefixSum[total] = prefixSum.get(total, 0) + 1
         return res
 
