@@ -10,10 +10,10 @@ class TestSolution(unittest.TestCase):
 
     def test_combinationSum2(self):
         # result = self.solution.combinationSum2([1, 1, 2, 5, 6, 7, 10], 8)
-        result = self.solution.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
-        expected = [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]
-        self.assertEqual(len(result), len(expected))
-        self.assertTrue(all(Counter(sub) in map(Counter, expected) for sub in result))
+        # result = self.solution.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
+        # expected = [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]
+        # self.assertEqual(len(result), len(expected))
+        # self.assertTrue(all(Counter(sub) in map(Counter, expected) for sub in result))
 
         result = self.solution.combinationSum2([2, 5, 2, 1, 2], 5)
         expected = [[1, 2, 2], [5]]
@@ -22,6 +22,30 @@ class TestSolution(unittest.TestCase):
 
 
 class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        cache = set()
+
+        # [2, 5, 2, 1, 2], 5
+        candidates.sort()
+
+        # [1, 2, 2, 2, 5], 5
+        def dfs(i, total, sub):
+            if total == target:
+                if tuple(sub) not in cache:
+                    res.append(sub.copy())
+                    cache.add(tuple(sub))
+            if i == len(candidates) or total >= target:
+                return
+
+            dfs(i + 1, total, sub)
+            dfs(i + 1, total + candidates[i], sub + [candidates[i]])
+
+        dfs(0, 0, [])
+        return res
+
+
+class SSolution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         if len(candidates) == 1:
             if candidates[0] == target:

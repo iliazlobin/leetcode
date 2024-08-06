@@ -28,6 +28,23 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
 
+        # [2, 3, 6, 7], 7
+        def dfs(i, total, sub):
+            if total == target:
+                res.append(sub.copy())
+            if i == len(candidates) or total >= target:
+                return
+            dfs(i, total + candidates[i], sub + [candidates[i]])
+            dfs(i + 1, total, sub)
+
+        dfs(0, 0, [])
+        return res
+
+
+class SSolution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+
         def dfs(i, sub, total):
             if total == target:
                 res.append(sub.copy())
