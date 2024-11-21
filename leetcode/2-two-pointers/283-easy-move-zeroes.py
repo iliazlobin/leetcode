@@ -27,7 +27,7 @@ class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
         l, r = 0, 1
         while l < len(nums) and r < len(nums):
-            if nums[l] != 0:
+            if nzums[l] != 0:
                 l += 1
                 if r < l:
                     r = l + 1

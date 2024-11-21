@@ -10,50 +10,49 @@ class TreeNode:
         self.right = right
 
 
-def list_to_binary_tree(lst: List[int]) -> Optional[TreeNode]:
-    if not lst:
-        return None
-    root = TreeNode(lst[0])
-    queue = [root]
-    i = 1
-    while queue and i < len(lst):
-        node = queue.pop(0)
-        if lst[i] is not None:
-            node.left = TreeNode(lst[i])
-            queue.append(node.left)
-        i += 1
-        if i < len(lst) and lst[i] is not None:
-            node.right = TreeNode(lst[i])
-            queue.append(node.right)
-        i += 1
-    return root
-
-
-def binary_tree_to_list(root: Optional[TreeNode]) -> List[int]:
-    if not root:
-        return []
-    result = []
-    queue = [root]
-    while queue:
-        node = queue.pop(0)
-        if node:
-            result.append(node.val)
-            queue.append(node.left)
-            queue.append(node.right)
-    return result
-
-
 class TestSolution(unittest.TestCase):
     def setUp(self):
         self.solution = Solution()
 
-    def test_isValid(self):
-        print()
+    def list_to_binary_tree(self, lst: List[Optional[int]]) -> Optional[TreeNode]:
+        if not lst:
+            return None
+        root = TreeNode(lst[0])
+        queue = [root]
+        i = 1
+        while queue and i < len(lst):
+            node = queue.pop(0)
+            if i < len(lst) and lst[i] is not None:
+                node.left = TreeNode(lst[i])
+                queue.append(node.left)
+            i += 1
+            if i < len(lst) and lst[i] is not None:
+                node.right = TreeNode(lst[i])
+                queue.append(node.right)
+            i += 1
+        return root
+
+    def binary_tree_to_list(self, root: Optional[TreeNode]) -> List[Optional[int]]:
+        if not root:
+            return []
+        result = []
+        queue = [root]
+        while queue:
+            node = queue.pop(0)
+            if node:
+                result.append(node.val)
+                queue.append(node.left)
+                queue.append(node.right)
+            else:
+                result.append(None)
+        while result and result[-1] is None:
+            result.pop()
+        return result
 
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        print()
+        return None
 
 
 if __name__ == "__main__":

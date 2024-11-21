@@ -140,4 +140,3 @@ while minH:
         count[c] -= 1
         if count[c] == 0:
             heapq.heappop(minH)
-

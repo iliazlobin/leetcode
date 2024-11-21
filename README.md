@@ -4,6 +4,4 @@ This repo contains tasks and solutions for LeetCode and NeetCode challenges I ca
 
 # My Progress
 
-[LeetCode Dashboard](https://leetcode.com/u/6iEph3Npnj/)
-
 ![](./docs/progress.png)
